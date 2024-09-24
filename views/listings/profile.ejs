@@ -1,0 +1,191 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<style>
+  .heading {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6rem;
+    margin-bottom: 2rem;
+  }
+  .heading span {
+    width: 100;
+    font-weight: 600;
+  }
+  .heading i {
+    font-size: 1.5rem;
+  }
+  .show_profile {
+    height: min-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .profile_name {
+    width: 10rem;
+    display: flex;
+    align-items: center;
+  }
+  .profile_image {
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+    background-color: #282525;
+    margin-right: 1rem;
+  }
+  .user_name {
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: start;
+    align-items: center;
+  }
+  .user_name h2 {
+    font-size: 1rem;
+    margin: 0 auto 0 0;
+  }
+  .user_name p {
+    font-size: 0.8rem;
+    color: rgb(93, 93, 93);
+    margin: 0;
+  }
+  .add_listing {
+    width: 100%;
+    border: 1px solid rgb(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: black;
+    border-radius: 0.8rem;
+    box-shadow: 0px 3px 20px 5px rgba(222, 222, 222, 0.7);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .add_listing_first_div {
+    padding-right: 1rem;
+  }
+  .add_listing_first_div h2 {
+    font-size: medium;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .add_listing_first_div p {
+    font-size: small;
+    margin: 0;
+  }
+  .house_image {
+    height: 85px;
+    min-width: 100px;
+  }
+  .house_image img {
+    height: 100%;
+    width: 100%;
+  }
+  .log_out_div {
+    height: 3rem;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid black;
+    border-radius: 0.6rem;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .log_out_div:hover {
+    background-color: rgba(222, 222, 222, 0.2);
+  }
+  .profiles_container {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: 575.9px) {
+    .navbar_div {
+      display: none;
+    }
+    .footer_div {
+      display: none;
+    }
+    .scroll_up {
+      bottom: 0;
+      display: flex;
+      transition: none;
+    }
+    .listing_div {
+      height: 100vh;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+    .profiles_container {
+      width: 100%;
+    }
+    .heading {
+      margin-top: 2.5rem;
+    }
+  }
+</style>
+
+<div class="profiles_container">
+  <h1 class="heading">
+    <span>Profile</span>
+    <i class="fa-regular fa-bell"></i>
+  </h1>
+  <div class="show_profile">
+    <div class="profile_name">
+      <div class="profile_image"><%= currUser.username.charAt(0) %></div>
+      <div class="user_name">
+        <h2><%= currUser.username %></h2>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <a href="/listings/new" class="add_listing">
+    <div class="add_listing_first_div">
+      <h2>Airbnb your home</h2>
+      <p>It’s easy to start hosting and earn extra income.</p>
+    </div>
+    <div class="house_image">
+      <img src="/images/house-image-2.webp" alt="house-image" />
+    </div>
+  </a>
+  <a href="/logout" class="log_out_div"> Log out </a>
+  <div class="scroll_up show">
+    <a href="/listings" class="bottom_nav_icon">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <p>Explore</p>
+    </a>
+    <a href="/listings/wishlist" class="bottom_nav_icon">
+      <i class="fa-regular fa-heart"></i>
+      <p>Wishlist</p>
+    </a>
+    <% if (!currUser) { %>
+    <a href="/login_signup" class="bottom_nav_icon">
+      <i class="fa-regular fa-user"></i>
+      <p>Log in</p>
+    </a>
+    <% } %> <% if (currUser) { %>
+    <a href="/listings/trips" class="bottom_nav_icon">
+      <i class="fa-solid fa-suitcase-rolling"></i>
+      <p>trips</p>
+    </a>
+    <a href="/listings/messages" class="bottom_nav_icon">
+      <i class="fa-regular fa-message"></i>
+      <p>Messages</p>
+    </a>
+    <a href="/listings/profile" class="bottom_nav_icon active">
+      <i class="fa-regular fa-user"></i>
+      <p>Profile</p>
+    </a>
+    <% } %>
+  </div>
+</div>

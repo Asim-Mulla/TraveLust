@@ -1,0 +1,96 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<style>
+  .heading {
+    padding-top: 2.1rem;
+    padding-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .heading + div {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .div1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .div3 {
+    max-width: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+  }
+  .div3:hover {
+    background-color: rgb(255, 251, 245);
+    cursor: pointer;
+  }
+  .div3 a {
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  @media (max-width: 575.9px) {
+    .navbar_div {
+      display: none;
+    }
+    .footer_div {
+      display: none;
+    }
+    .scroll_up {
+      bottom: 0;
+      display: flex;
+      transition: none;
+    }
+    .listing_div {
+      height: 100vh;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+  }
+</style>
+
+<div class="trips_container">
+  <h1 class="heading border-bottom">Trips</h1>
+  <div>
+    <div class="div1"><p>No trips booked ... yet!</p></div>
+    <div>
+      <p>Time to dust off your bags and start planning your next adventure.</p>
+    </div>
+    <div class="div3"><a href="/listings">Start searching</a></div>
+  </div>
+  <div class="scroll_up show">
+    <a href="/listings" class="bottom_nav_icon">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <p>Explore</p>
+    </a>
+    <a href="/listings/wishlist" class="bottom_nav_icon">
+      <i class="fa-regular fa-heart"></i>
+      <p>Wishlist</p>
+    </a>
+    <% if (!currUser) { %>
+    <a href="/login_signup" class="bottom_nav_icon">
+      <i class="fa-regular fa-user"></i>
+      <p>Log in</p>
+    </a>
+    <% } %> <% if (currUser) { %>
+    <a href="/listings/trips" class="bottom_nav_icon active">
+      <i class="fa-solid fa-suitcase-rolling"></i>
+      <p>trips</p>
+    </a>
+    <a href="/listings/messages" class="bottom_nav_icon">
+      <i class="fa-regular fa-message"></i>
+      <p>Messages</p>
+    </a>
+    <a href="/listings/profile" class="bottom_nav_icon">
+      <i class="fa-regular fa-user"></i>
+      <p>Profile</p>
+    </a>
+    <% } %>
+  </div>
+</div>

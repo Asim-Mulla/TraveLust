@@ -1,0 +1,74 @@
+<nav class="navbar bg-body-light border-bottom sticky-top">
+  <div class="container-fluid navbar_container">
+    <div class="icon_div">
+      <a class="navbar-brand" href="/listings"
+        ><i class="fa-regular fa-paper-plane logo" style="color: #ce2d2d"></i
+      ></a>
+      <div class="navbar-nav me-auto">
+        <a class="explore_outer" href="/listings">TraveLust</a>
+      </div>
+    </div>
+
+    <% if (currPage !== "/listings" ) { %>
+    <div class="back">
+      <a href="/listings">
+        <i class="fa-solid fa-chevron-left"></i>
+      </a>
+    </div>
+    <% } %>
+
+    <div class="search">
+      <form class="d-flex" role="search" action="/listings/search" method="GET">
+        <input
+          class="form-control me-2"
+          type="search"
+          name="q"
+          placeholder="Where To?"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </div>
+    <div>
+      <a href="/listings/new" class="add-home-outer">Airbnb your home</a>
+    </div>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+    >
+      <div id="user">
+        <span class="user-bar"><i class="fa-solid fa-bars"></i></span>
+        <span class="user-user"><i class="fa-solid fa-user"></i></span>
+      </div>
+      <!-- <span class="navbar-toggler-icon"></span> -->
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <% if (currUser) { %>
+      <div class="navbar-nav me-auto border-bottom info_to_hide">
+        <a class="nav-link border-bottom" href="/listings/profile">Profile</a>
+        <a class="nav-link" href="/listings/wishlist">Wishlists</a>
+        <a class="nav-link" href="/listings/trips">Trips</a>
+        <a class="nav-link" href="/listings/messages">Messages</a>
+      </div>
+      <% } %>
+      <div class="navbar-nav me-auto">
+        <a class="nav-link explore_inner" href="/listings">Explore</a>
+      </div>
+      <div class="navbar-nav">
+        <a class="nav-link add-home-inner border-bottom" href="/listings/new"
+          >Airbnb your home</a
+        >
+        <% if (!currUser) { %>
+        <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+        <a class="nav-link" href="/login"><b>Login</b></a>
+        <% } %> <% if (currUser) { %>
+        <a class="nav-link" href="/logout"><b>LogOut</b></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

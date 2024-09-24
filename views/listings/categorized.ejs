@@ -1,0 +1,161 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  #filters_container {
+    display: flex;
+  }
+  .not-found {
+    height: 20rem;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
+<div
+  class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mt-2"
+>
+  <% if (allListings.length === 0) { %>
+  <div class="not-found">
+    <p>OOPS!</p>
+    <p>Sorry, no listing available for '<%= appliedCategory %>'</p>
+  </div>
+  <% } %> <% for (let listing of allListings) { %>
+  <a href="/listings/<%= listing._id %>" class="listing-link">
+    <div class="card card_hover col listing-card">
+      <img
+        src="<%= listing.image.url %>"
+        class="card-img-top"
+        alt="listing_image"
+        style="height: 16rem"
+      />
+      <div class="card-body">
+        <h5 class="card-title"><b><%= listing.title %></b></h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          Price : &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+          <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+        </li>
+        <li class="list-group-item">Country : <%= listing.country %></li>
+      </ul>
+    </div>
+  </a>
+  <% } %>
+</div>
+
+<div class="scroll_up show">
+  <a href="/listings" class="bottom_nav_icon active">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <p>Explore</p>
+  </a>
+  <a href="/listings/wishlist" class="bottom_nav_icon">
+    <i class="fa-regular fa-heart"></i>
+    <p>Wishlist</p>
+  </a>
+  <% if (!currUser) { %>
+  <a href="/login_signup" class="bottom_nav_icon">
+    <i class="fa-regular fa-user"></i>
+    <p>Log in</p>
+  </a>
+  <% } %> <% if (currUser) { %>
+  <a href="/listings/trips" class="bottom_nav_icon">
+    <i class="fa-solid fa-suitcase-rolling"></i>
+    <p>Trips</p>
+  </a>
+  <a href="/listings/messages" class="bottom_nav_icon">
+    <i class="fa-regular fa-message"></i>
+    <p>Messages</p>
+  </a>
+  <a href="/listings/profile" class="bottom_nav_icon">
+    <i class="fa-regular fa-user"></i>
+    <p>Profile</p>
+  </a>
+  <% } %>
+</div>
+
+<script>
+  let filters = document.querySelectorAll(".filter");
+  let filtersContainer = document.querySelector(".filters");
+  let leftArrow = document.querySelector(".scroll-icon-left");
+  let rightArrow = document.querySelector(".scroll-icon-right");
+
+  // Filter scrolling functionality
+  let removeAllActiveFromFilters = () => {
+    filters.forEach((filter) => {
+      filter.classList.remove("active");
+    });
+  };
+
+  filters.forEach((filter) => {
+    filter.addEventListener("click", () => {
+      if (filter.classList.contains("active")) {
+        filter.classList.remove("active");
+      } else {
+        removeAllActiveFromFilters();
+        filter.classList.add("active");
+      }
+    });
+  });
+
+  let manageIcons = () => {
+    if (filtersContainer.scrollLeft >= 20) {
+      leftArrow.classList.add("active");
+    } else {
+      leftArrow.classList.remove("active");
+    }
+
+    let maxScrollValue =
+      filtersContainer.scrollWidth - filtersContainer.clientWidth - 20;
+
+    if (filtersContainer.scrollLeft >= maxScrollValue) {
+      rightArrow.classList.remove("active");
+    } else {
+      rightArrow.classList.add("active");
+    }
+  };
+
+  rightArrow.addEventListener("click", () => {
+    filtersContainer.scrollLeft += 400;
+    manageIcons();
+  });
+  leftArrow.addEventListener("click", () => {
+    filtersContainer.scrollLeft -= 400;
+    manageIcons();
+  });
+
+  filtersContainer.addEventListener("scroll", manageIcons);
+
+  // tax toggle functionality
+  let taxToggle = document.getElementById("flexSwitchCheckDefault");
+  taxToggle.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (info of taxInfo) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
+
+  //
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    let scrollUpDiv = document.querySelector(".scroll_up");
+    let currentScrollY = window.scrollY;
+
+    if (currentScrollY < lastScrollY) {
+      scrollUpDiv.classList.add("show");
+    } else {
+      scrollUpDiv.classList.remove("show");
+    }
+
+    lastScrollY = currentScrollY;
+  });
+</script>

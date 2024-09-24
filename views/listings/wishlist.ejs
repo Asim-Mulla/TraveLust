@@ -1,0 +1,132 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<style>
+  .heading {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+  .card-link {
+    text-decoration: none;
+    display: block;
+    margin-bottom: 2rem;
+  }
+  .card {
+    padding: 0.1rem 0.1rem 0rem 0.1rem;
+    max-width: 18rem;
+    border-radius: 1rem;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-body {
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  }
+  .card i {
+    height: 100%;
+    width: 100%;
+    font-size: 3rem;
+    color: white;
+    background-color: rgb(182, 182, 182);
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @media (max-width: 575.9px) {
+    .navbar_div {
+      display: none;
+    }
+    .footer_div {
+      display: none;
+    }
+    .scroll_up {
+      bottom: 0;
+      display: flex;
+      transition: none;
+    }
+    .listing_div {
+      height: 100vh;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+    .card-link {
+      width: 50%;
+    }
+    .card {
+      max-width: 15rem;
+    }
+    .card-body {
+      padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    }
+    .card i {
+      height: 100%;
+      width: 100%;
+      font-size: 3rem;
+      color: white;
+      background-color: rgb(182, 182, 182);
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+</style>
+
+<div class="wishlists_container">
+  <h1 class="heading">Wishlists</h1>
+  <div
+    class="row row-cols-xxl-4 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2 mt-2"
+  >
+    <a href="" class="card-link">
+      <div class="card">
+        <i class="card-img-top fa-solid fa-clock-rotate-left"></i>
+        <div class="card-body">
+          <p class="card-text">Recently viewed</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="scroll_up show">
+    <a href="/listings" class="bottom_nav_icon">
+      <!-- <a href="#" class="bottom_nav_icon"> -->
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <p>Explore</p>
+    </a>
+    <a href="/listings/wishlist" class="bottom_nav_icon active">
+      <!-- <a href="#" class="bottom_nav_icon"> -->
+      <i class="fa-regular fa-heart"></i>
+      <p>Wishlist</p>
+    </a>
+    <% if (!currUser) { %>
+    <a href="/login_signup" class="bottom_nav_icon">
+      <!-- <a href="#" class="bottom_nav_icon"> -->
+      <i class="fa-regular fa-user"></i>
+      <p>Log in</p>
+    </a>
+    <% } %> <% if (currUser) { %>
+    <a href="/listings/trips" class="bottom_nav_icon">
+      <!-- <a href="#" class="bottom_nav_icon"> -->
+      <i class="fa-solid fa-suitcase-rolling"></i>
+      <p>trips</p>
+    </a>
+    <a href="/listings/messages" class="bottom_nav_icon">
+      <!-- <a href="#" class="bottom_nav_icon"> -->
+      <i class="fa-regular fa-message"></i>
+      <p>Messages</p>
+    </a>
+    <a href="/listings/profile" class="bottom_nav_icon">
+      <!-- <a href="#" class="bottom_nav_icon"> -->
+      <i class="fa-regular fa-user"></i>
+      <p>Profile</p>
+    </a>
+    <% } %>
+  </div>
+</div>

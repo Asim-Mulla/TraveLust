@@ -1,0 +1,172 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<style>
+  @media (max-width: 575.9px) {
+    .navbar_div {
+      display: none;
+    }
+    .listing_div {
+      margin-top: 3rem;
+    }
+    .footer_div {
+      display: none;
+    }
+    .scroll_up {
+      bottom: 0;
+      display: flex;
+      transition: none;
+    }
+    .new_col {
+      margin-bottom: 5rem;
+    }
+  }
+</style>
+
+<div class="row new_row">
+  <div class="col-8 offset-2 new_col">
+    <h3>Creating a New Listing</h3>
+    <br />
+    <form
+      action="/listings"
+      method="post"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
+      <div>
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          name="listing[title]"
+          placeholder="Enter Title"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">Please enter a valid Title</div>
+        <br />
+      </div>
+      <div>
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          name="listing[description]"
+          placeholder="Enter Description"
+          class="form-control"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please enter a short Description</div>
+        <br />
+      </div>
+      <div>
+        <label for="image" class="form-label">Upload Listing Image</label>
+        <input
+          type="file"
+          name="listing[image]"
+          class="form-control"
+          required
+        />
+      </div>
+      <br />
+      <div>
+        <label for="category" class="form-label">Category</label>
+        <input
+          type="text"
+          name="listing[category]"
+          placeholder="Choose Category"
+          class="form-control"
+          list="category-options"
+          required
+        />
+        <datalist id="category-options">
+          <option value="Pools"></option>
+          <option value="Trecking"></option>
+          <option value="Beaches"></option>
+          <option value="Rooms"></option>
+          <option value="Castles"></option>
+          <option value="Boats"></option>
+          <option value="Arctic"></option>
+          <option value="Iconic-Cities"></option>
+          <option value="Mountains"></option>
+          <option value="Parties"></option>
+          <option value="Sports"></option>
+          <option value="Gyms"></option>
+          <option value="Camping"></option>
+          <option value="Snowboarding"></option>
+          <option value="Birthday"></option>
+        </datalist>
+        <div class="invalid-feedback">Please enter a valid category</div>
+        <br />
+      </div>
+      <div>
+        <label for="price" class="form-label">Price</label>
+        <input
+          type="number"
+          name="listing[price]"
+          placeholder="Enter Price"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">Please enter a valid Price</div>
+        <br />
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            name="listing[location]"
+            placeholder="Enter Location"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Please enter a valid Location</div>
+          <br />
+        </div>
+        <br />
+        <div class="col-md-4">
+          <label for="country" class="form-label">Country</label>
+          <input
+            type="text"
+            name="listing[country]"
+            placeholder="Enter Country"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Please enter a valid Country</div>
+          <br />
+        </div>
+      </div>
+
+      <br />
+      <button class="btn btn-dark mb-5">Create</button>
+    </form>
+  </div>
+  <div class="scroll_up show">
+    <a href="/listings" class="bottom_nav_icon">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <p>Explore</p>
+    </a>
+    <a href="/listings/wishlist" class="bottom_nav_icon">
+      <i class="fa-regular fa-heart"></i>
+      <p>Wishlist</p>
+    </a>
+    <% if (!currUser) { %>
+    <a href="/login_signup" class="bottom_nav_icon">
+      <i class="fa-regular fa-user"></i>
+      <p>Log in</p>
+    </a>
+    <% } %> <% if (currUser) { %>
+    <a href="/listings/trips" class="bottom_nav_icon">
+      <i class="fa-solid fa-suitcase-rolling"></i>
+      <p>trips</p>
+    </a>
+    <a href="/listings/messages" class="bottom_nav_icon">
+      <i class="fa-regular fa-message"></i>
+      <p>Messages</p>
+    </a>
+    <a href="/listings/profile" class="bottom_nav_icon">
+      <i class="fa-regular fa-user"></i>
+      <p>Profile</p>
+    </a>
+    <% } %>
+  </div>
+</div>

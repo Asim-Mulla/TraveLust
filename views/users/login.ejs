@@ -1,0 +1,96 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<style>
+  @media (max-width: 575.9px) {
+    .navbar_div {
+      display: none;
+    }
+    .footer_div {
+      display: none;
+    }
+    .scroll_up {
+      bottom: 0px;
+      display: flex;
+      transition: none;
+    }
+    .listing_div {
+      height: 100vh;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+    .login_h1 {
+      height: 2.8rem;
+      font-size: 0.9rem;
+      font-weight: 800;
+      border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .login_form {
+      height: calc(100% - 3.7rem);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: auto auto auto auto;
+    }
+    .welcome {
+      display: inline-block;
+      margin-top: 1rem;
+      margin-bottom: 3rem;
+      font-size: 1.4rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+    .login_form form {
+      width: 85%;
+    }
+  }
+</style>
+
+<div class="row mt-3 mb-3 login">
+  <h1 class="col-6 offset-3 mb-3 login_h1">LogIn for TraveLust</h1>
+  <div class="col-6 offset-3 login_form">
+    <h2 class="welcome">Welcome to TraveLust</h2>
+    <form action="/login" method="post" novalidate class="needs-validation">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          id="username"
+          required
+        />
+        <div class="invalid-feedback">Please Enter a Username</div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="password"
+          required
+        />
+        <div class="invalid-feedback">Please Enter a Password</div>
+      </div>
+      <button class="btn btn-dark">LogIn</button>
+    </form>
+  </div>
+  <div class="scroll_up">
+    <a href="/listings" class="bottom_nav_icon">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <p>Explore</p>
+    </a>
+    <a href="/listings/wishlist" class="bottom_nav_icon">
+      <i class="fa-regular fa-heart"></i>
+      <p>Wishlist</p>
+    </a>
+    <a href="/login_signup" class="bottom_nav_icon">
+      <i class="fa-regular fa-user"></i>
+      <p>Log in</p>
+    </a>
+  </div>
+</div>
