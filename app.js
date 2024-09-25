@@ -82,6 +82,10 @@ async function main() {
   await mongoose.connect(Atlas_Db_Url);
 }
 
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
@@ -98,3 +102,5 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
   console.log("app is listening on port 8080");
 });
+
+// https://travelust.onrender.com

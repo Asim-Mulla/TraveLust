@@ -53,7 +53,13 @@
   <h1 class="col-6 offset-3 mb-3 signup_h1">SignUp for TraveLust</h1>
   <div class="col-6 offset-3 signup_form">
     <h2 class="welcome">Welcome to TraveLust</h2>
-    <form action="/signup" method="post" novalidate class="needs-validation">
+    <form
+      action="/signup"
+      method="post"
+      novalidate
+      class="needs-validation"
+      onsubmit="return validateForm()"
+    >
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input
@@ -87,6 +93,17 @@
         />
         <div class="invalid-feedback">Please Enter a Password</div>
       </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          class="form-control"
+          id="confirmPassword"
+          required
+        />
+        <div class="invalid-feedback">Incorrect Password</div>
+      </div>
       <button class="btn btn-dark">SignUp</button>
     </form>
   </div>
@@ -105,3 +122,16 @@
     </a>
   </div>
 </div>
+
+<script>
+  function validateForm() {
+    let password = document.querySelector(".password");
+    let confirmPassword = document.querySelector(".confirmPassword");
+
+    if (password !== confirmPassword) {
+      return false;
+    }
+
+    return true;
+  }
+</script>

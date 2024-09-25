@@ -19,7 +19,17 @@ module.exports.showListing = async (req, res) => {
     req.flash("error", "Listing you requested for does't exists");
     res.redirect("/listings");
   }
-  res.render("listings/show.ejs", { listing });
+
+  let reviewed = false;
+  if (listing.reviews.length > 0 && res.locals.currUser) {
+    for (review of listing.reviews) {
+      if (review.author.username === res.locals.currUser.username) {
+        reviewed = true;
+      }
+    }
+  }
+
+  res.render("listings/show.ejs", { listing, reviewed });
 };
 
 module.exports.createListing = async (req, res, next) => {

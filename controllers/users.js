@@ -4,9 +4,16 @@ module.exports.renderSignupForm = (req, res) => {
   res.render("users/signup.ejs");
 };
 
-module.exports.signup = async (req, res) => {
+module.exports.signup = async (req, res, next) => {
   try {
-    let { username, email, password } = req.body;
+    let { username, email, password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+      req.flash("error", "Incorrect Password");
+      res.redirect("/signup");
+      return;
+    }
+
     const newUser = new User({ email, username });
     const registeredUser = await User.register(newUser, password);
     req.login(registeredUser, (err) => {
