@@ -1,0 +1,1 @@
+TraveLust is a full-stack Airbnb clone designed for seamless travel booking. Users can browse listings, add a new one and list all vacation rentals with ease, featuring dynamic search, user authentucation and fully responsive.
