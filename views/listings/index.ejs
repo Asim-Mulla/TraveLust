@@ -4,11 +4,36 @@
   #filters_container {
     display: flex;
   }
+
+  @media (max-width: 375px) {
+    .tax_toggle_bottomOne_container {
+      display: inline-block;
+    }
+
+    .tax_toggle_bottomOne {
+      display: flex;
+    }
+  }
 </style>
 
 <div
   class="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 mt-2"
 >
+  <div class="tax-toggle tax_toggle_bottomOne_container">
+    <div
+      class="form-check-reverse form-switch tax_toggle_bottomOne mb-3 tax-container"
+    >
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckDefault_2"
+      />
+      <label class="form-check-label" for="flexSwitchCheckDefault_2"
+        >Default total after taxes</label
+      >
+    </div>
+  </div>
   <% for (let listing of allListings) { %>
   <a href="/listings/<%= listing._id %>" class="listing-link">
     <div class="card card_hover col listing-card">
@@ -115,7 +140,7 @@
   filtersContainer.addEventListener("scroll", manageIcons);
 
   // tax toggle functionality
-  let taxToggle = document.getElementById("flexSwitchCheckDefault");
+  let taxToggle = document.getElementById("flexSwitchCheckDefault_2");
   taxToggle.addEventListener("click", () => {
     let taxInfo = document.getElementsByClassName("tax-info");
     for (info of taxInfo) {
