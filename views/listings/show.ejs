@@ -2,16 +2,12 @@
 <script>
   const listingLocation = "<%= listing.location %>";
   const coordinates = <%- JSON.stringify(listing.geometry.coordinates) %>;
-
-  // const reviewed = false;
-  // if (listing.reviews.length > 0) {
-  //   for (review of listing.reviews) {
-  //     if (review.author.username === currUser.username) {
-  //       reviewed = true;
-  //     }
-  //   }
-  // }
 </script>
+<style>
+  .listing_div {
+    margin-top: 5rem;
+  }
+</style>
 <div class="row">
   <div class="mt-3 show-page">
     <h4><%= listing.title %></h4>
