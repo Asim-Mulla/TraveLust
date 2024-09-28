@@ -140,8 +140,21 @@
   filtersContainer.addEventListener("scroll", manageIcons);
 
   // tax toggle functionality
-  let taxToggle = document.getElementById("flexSwitchCheckDefault_2");
+
+  let taxToggle = document.getElementById("flexSwitchCheckDefault");
   taxToggle.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (info of taxInfo) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
+
+  let taxToggle_2 = document.getElementById("flexSwitchCheckDefault_2");
+  taxToggle_2.addEventListener("click", () => {
     let taxInfo = document.getElementsByClassName("tax-info");
     for (info of taxInfo) {
       if (info.style.display != "inline") {
