@@ -19,23 +19,23 @@ const localStrategy = require("passport-local");
 const User = require("./models/user.js");
 const app = express();
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/traveLust";
-// const Atlas_Db_Url = process.env.ATLAS_DB_URL;
+// const MONGO_URL = "mongodb://127.0.0.1:27017/traveLust";
+const Atlas_Db_Url = process.env.ATLAS_DB_URL;
 
-// const store = MongoStore.create({
-//   mongoUrl: Atlas_Db_Url,
-//   crypto: {
-//     secret: process.env.SECRET,
-//   },
-//   touchAfter: 24 * 3600,
-// });
+const store = MongoStore.create({
+  mongoUrl: Atlas_Db_Url,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
 
-// store.on("error", () => {
-//   console.log("ERROR in mongo session store", error);
-// });
+store.on("error", () => {
+  console.log("ERROR in mongo session store", error);
+});
 
 const sessionOptions = {
-  // store,
+  store,
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
@@ -78,8 +78,8 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
-  // await mongoose.connect(Atlas_Db_Url);
+  // await mongoose.connect(MONGO_URL);
+  await mongoose.connect(Atlas_Db_Url);
 }
 
 app.get("/", (req, res) => {
