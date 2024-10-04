@@ -159,33 +159,4 @@
     </div>
   </a>
   <a href="/logout" class="log_out_div"> Log out </a>
-  <div class="scroll_up show">
-    <a href="/listings" class="bottom_nav_icon">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <p>Explore</p>
-    </a>
-    <a href="/listings/wishlist" class="bottom_nav_icon">
-      <i class="fa-regular fa-heart"></i>
-      <p>Wishlist</p>
-    </a>
-    <% if (!currUser) { %>
-    <a href="/login_signup" class="bottom_nav_icon">
-      <i class="fa-regular fa-user"></i>
-      <p>Log in</p>
-    </a>
-    <% } %> <% if (currUser) { %>
-    <a href="/listings/trips" class="bottom_nav_icon">
-      <i class="fa-solid fa-suitcase-rolling"></i>
-      <p>trips</p>
-    </a>
-    <a href="/listings/messages" class="bottom_nav_icon">
-      <i class="fa-regular fa-message"></i>
-      <p>Messages</p>
-    </a>
-    <a href="/listings/profile" class="bottom_nav_icon active">
-      <i class="fa-regular fa-user"></i>
-      <p>Profile</p>
-    </a>
-    <% } %>
-  </div>
 </div>

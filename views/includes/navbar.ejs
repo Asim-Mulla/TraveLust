@@ -42,9 +42,13 @@
     >
       <div id="user">
         <span class="user-bar"><i class="fa-solid fa-bars"></i></span>
+
+        <% if (!currUser) { %>
         <span class="user-user"><i class="fa-solid fa-user"></i></span>
+        <% } else { %>
+        <div class="user-user-logedin"><%= currUser.username.charAt(0) %></div>
+        <% } %>
       </div>
-      <!-- <span class="navbar-toggler-icon"></span> -->
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <% if (currUser) { %>

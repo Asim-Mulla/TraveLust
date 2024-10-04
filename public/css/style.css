@@ -203,6 +203,18 @@ main {
   align-items: end;
 }
 
+.user-user-logedin {
+  height: 1.8rem;
+  width: 1.8rem;
+  font-size: small;
+  color: white;
+  background-color: #282525;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .nav-link {
   color: black !important;
 }
@@ -312,7 +324,7 @@ main {
   display: none;
 }
 
-.filter {
+.filterDiv {
   height: 100%;
   margin-right: 3rem;
   display: flex;
@@ -324,17 +336,17 @@ main {
   white-space: nowrap;
 }
 
-.filter:hover {
+.filterDiv:hover {
   opacity: 1;
   border-bottom: 1.5px solid black;
 }
 
-.filter.active {
+.filterDiv.active {
   opacity: 1;
   border-bottom: 1.5px solid black;
 }
 
-.filter p {
+.filterDiv p {
   font-size: 0.8rem;
   margin: 0;
 }
