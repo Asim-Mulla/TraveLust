@@ -794,6 +794,8 @@ footer {
 
 /* Map */
 .map-container {
+  position: relative;
+  z-index: 1;
   width: 60% !important;
   height: 70vh !important;
   margin-left: auto;

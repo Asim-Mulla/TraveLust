@@ -58,12 +58,8 @@ const listingSchema = Schema({
       "Arctic",
       "Iconic-Cities",
       "Mountains",
-      "Parties",
-      "Sports",
-      "Gyms",
       "Camping",
       "Snowboarding",
-      "Birthday",
     ],
   },
 });
