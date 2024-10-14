@@ -1,4 +1,5 @@
 const Listing = require("../models/listing.js");
+const { cloudinary } = require("../cloudConfig.js");
 
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({});
@@ -83,7 +84,31 @@ module.exports.updateListing = async (req, res) => {
 
 module.exports.deleteListing = async (req, res) => {
   let { id } = req.params;
-  let deletedList = await Listing.findByIdAndDelete(id);
+
+  // Find the listing to get the image public ID from Cloudinary
+  const listing = await Listing.findById(id);
+
+  if (!listing) {
+    req.flash("error", "Listing not found");
+    return res.redirect("/listings");
+  }
+
+  // Extracting the public ID from the URL
+  const imagePublicId = listing.image.filename;
+
+  // Delete the image from Cloudinary
+  if (imagePublicId) {
+    try {
+      let result = await cloudinary.uploader.destroy(imagePublicId);
+      // console.log("Image deleted from Cloudinary");
+    } catch (err) {
+      // console.error("Error deleting image from Cloudinary:", err);
+    }
+  }
+
+  // Now, delete the listing from the database
+  await Listing.findByIdAndDelete(id);
+
   req.flash("success", "Listing Deleted");
   res.redirect("/listings");
 };
