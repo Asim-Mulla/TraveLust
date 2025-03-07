@@ -532,7 +532,7 @@ main {
   }
 }
 
-/* Navbar */
+/* Footer */
 .footer_div {
   width: calc(100vw - 0.8rem);
   max-width: 2360px;
@@ -729,6 +729,7 @@ footer {
 .listing-card {
   width: 100% !important;
   border: none !important;
+  border-radius: 1rem !important;
   margin-bottom: 2rem !important;
 }
 
@@ -737,7 +738,8 @@ footer {
 }
 
 .card-img-top {
-  border-radius: 1rem !important;
+  border-top-left-radius: 1rem !important;
+  border-top-right-radius: 1rem !important;
   width: 100% !important;
 }
 
