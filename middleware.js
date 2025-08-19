@@ -74,29 +74,42 @@ module.exports.validateReview = (req, res, next) => {
   }
 };
 
-module.exports.validateLocation = (req, res, next) => {
-  geocode();
+module.exports.validateLocation = async (req, res, next) => {
+  try {
+    const address = req.body.listing?.location;
+    if (!address) {
+      req.flash("error", "Location is required");
+      return res.redirect("/listings/new");
+    }
 
-  function geocode() {
-    let address = req.body.listing.location;
-    let url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
       address
     )}`;
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.length === 0) {
-          req.flash("error", "Enter a valid location");
-          return res.redirect("/listings/new");
-        } else {
-          req.lat = data[0].lat;
-          req.lon = data[0].lon;
-          next();
-        }
-      })
-      .catch((err) => {
-        throw new ExpressError(500, "Something went wrong");
-      });
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent": "Travelust/1.0 (https://travelust.onrender.com)", // OSM API best practice
+      },
+    });
+
+    if (!response.ok) {
+      throw new ExpressError(500, "Geocoding service failed");
+    }
+
+    const data = await response.json();
+
+    if (!data.length) {
+      req.flash("error", "Enter a valid location");
+      return res.redirect("/listings/new");
+    }
+
+    req.lat = parseFloat(data[0].lat);
+    req.lon = parseFloat(data[0].lon);
+
+    return next();
+  } catch (err) {
+    return next(
+      new ExpressError(500, "Something went wrong while validating location")
+    );
   }
 };
