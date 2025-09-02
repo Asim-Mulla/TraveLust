@@ -90,7 +90,9 @@ async function main() {
 app.get("/", (req, res) => {
   res.redirect("/listings");
 });
-
+app.get("/health", (req, res) => {
+  return res.status(200).json({ status: "ok", message: "server is running." });
+});
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
