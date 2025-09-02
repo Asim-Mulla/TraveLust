@@ -17,7 +17,12 @@ const userRouter = require("./routes/user.js");
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require("./models/user.js");
+const job = require("./config/cron.js");
 const app = express();
+
+if (process.env.NODE_ENV === "production") {
+  job.start();
+}
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/traveLust";
 const Atlas_Db_Url = process.env.ATLAS_DB_URL;
